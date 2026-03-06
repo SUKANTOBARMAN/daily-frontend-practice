@@ -1,0 +1,456 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ১. গ্লোবাল কন্টেইনার (যেটি লেআউট ভাঙতে দেবে না) */
+.container {
+  width: 100%;
+  max-width: 1110px;
+  margin-inline: auto;
+  padding-inline: 24px; /* মোবাইলের জন্য সেফটি স্পেস */
+}
+
+.decorative-line {
+  width: 200px;
+  height: 1px;
+  background-color: #c396c6;
+  margin-bottom: 2.5rem;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  max-width: 1440px; /* বেশিরভাগ প্রফেশনাল ওয়েবসাইটের সর্বোচ্চ সাইজ এটিই হয় */
+  margin: 0 auto; /* স্ক্রিন ১৪৪০ পিক্সেলের চেয়ে বড় হলে ওয়েবসাইটকে স্ক্রিনের মাঝখানে রাখবে */
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 10%;
+  position: relative;
+  z-index: 100;
+  background-color: #ffffff;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.main-nav .nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #837d87;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1.5;
+}
+
+.main-nav a:hover {
+  color: #2d2640;
+}
+
+.btn-view-plans {
+  border: 1.5px solid #2d2640;
+  padding: 0.6rem 1.5rem;
+  color: #2d2640 !important;
+}
+
+.btn-view-plans:hover {
+  background-color: #2d2640;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 2rem 5%;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #2b272f;
+    display: none;
+    flex-direction: column;
+    padding-top: 3rem;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+  .main-nav .nav-list {
+    flex-direction: column;
+    gap: 2.5;
+  }
+
+  .main-nav a {
+    color: #ffffff;
+    font-size: 1.2rem;
+  }
+
+  .btn-view-plans {
+    border-color: #ffffff;
+    color: #ffffff !important;
+    width: 80%; /* মোবাইলে বাটন বড় হবে */
+    text-align: center;
+  }
+
+  .btn-view-plans:hover {
+    background-color: #ffffff;
+    color: #2b272f !important;
+  }
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2d2640;
+  padding: 0 10%;
+  color: white;
+  position: relative;
+}
+
+.hero-content {
+  flex: 1;
+  padding-right: 50px;
+  transform: translateY(-85px);
+  z-index: 2;
+}
+
+.hero-content .hero-image {
+  position: relative;
+  z-index: 2;
+}
+.hero-image {
+  flex: 1;
+  transform: translateY(100px);
+}
+
+.hero-image img {
+  width: 100%;
+  display: block;
+}
+
+.hero-content h2 {
+  font-size: 3.5rem;
+  font-family: 'DM Serif Display', serif;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #fafafa;
+}
+
+.hero-content button {
+  padding: 0.6rem 1.5rem;
+  border: 1px solid #fff;
+  background-color: #2d2640;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 436px;
+  height: 593px;
+  background-image: url('./images/bg-pattern-intro-right-desktop.svg');
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -250px;
+  left: 0;
+  width: 1000px;
+  height: 504px;
+  background-image: url('./images/bg-pattern-intro-left-desktop.svg');
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  /* ১. ডেস্কটপের প্যাটার্নগুলো মোবাইলে পুরোপুরি হাইড করে দিচ্ছি */
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+
+  /* ২. মূল হিরো কন্টেইনার */
+  .hero {
+    flex-direction: column-reverse;
+    padding: 0;
+    text-align: center;
+    background-color: transparent; /* পার্পেল কালারটি এখান থেকে সরিয়ে ফেললাম */
+  }
+
+  /* ৩. ইমেজ রিসেট */
+  .hero-image {
+    transform: translateY(0);
+    margin-bottom: 0; /* ডেস্কটপে নেগেটিভ মার্জিন থাকলে সেটা রিসেট */
+    width: 100%;
+  }
+
+  /* ৪. কন্টেন্ট বক্স (এখানে কালার ও প্যাটার্ন বসবে) */
+  .hero-content {
+    background-color: #2d2640; /* পার্পেল কালারটি এখানে দিলাম */
+    padding: 100px 20px; /* উপরে-নিচে একটু স্পেস বাড়িয়ে দিলাম */
+    transform: translateY(0);
+    width: 100%;
+
+    /* Multiple Backgrounds Setup (আসল ম্যাজিক!) */
+    background-image:
+      url('./images/bg-pattern-intro-left-mobile.svg'),
+      /* উপরের বামের প্যাটার্ন */
+        url('./images/bg-pattern-intro-right-mobile.svg'); /* নিচের ডানের প্যাটার্ন */
+
+    background-position:
+      top left,
+      /* প্রথম ছবি বসবে উপরে-বামে */ bottom right; /* দ্বিতীয় ছবি বসবে নিচে-ডানে */
+
+    background-repeat: no-repeat, no-repeat;
+  }
+
+  .hero-content h2 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content .decorative-line {
+    display: none;
+  }
+}
+
+/* ২. মেইন সেকশন প্যাডিং */
+.features {
+  padding-top: 150px; /* মডার্ন লজিক্যাল প্রোপার্টি (ওপর-নিচে প্যাডিং) */
+}
+
+/* ৪. টাইপোগ্রাফি */
+.section-title {
+  font-size: 3.5rem;
+  margin-bottom: 60px;
+}
+
+.feature-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.feature-card h5 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  line-height: 1.6; /* পড়ার সুবিধার জন্য লাইন হাইট */
+  color: #837d87;
+}
+
+/* ৫. লেআউট ম্যাজিক (মিডিয়া কোয়েরি ছাড়াই রেসপন্সিভ গ্রিড!) */
+.features-grid {
+  display: grid;
+  /* auto-fit এর ম্যাজিক: স্ক্রিন ছোট হলে একা একাই নিচে চলে যাবে! */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* ৬. শুধু মোবাইলের জন্য ফন্ট সাইজ এবং সেন্টারিং (Mobile Media Query) */
+@media (max-width: 768px) {
+  .features {
+    padding-block: 100px;
+    text-align: center; /* মোবাইলে সব টেক্সট সেন্টারে চলে আসবে */
+  }
+
+  .features .decorative-line {
+    margin: 0 auto 40px auto; /* লাইনটিকে মোবাইলে মাঝখানে আনার ট্রিক */
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+} /* ব্র্যাকেট ক্লোজ করতে ভুলবেন না! */
+
+.cta-section {
+  padding-block: 100px;
+}
+
+.cta-box {
+  background-color: #2d2640;
+  color: white;
+  padding: 70px 80px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url('./images/bg-pattern-how-we-work-desktop.svg');
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+
+.cta-box h2 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-transparent:hover {
+  background-color: white;
+  color: #2d2640;
+}
+
+@media (max-width: 768px) {
+  .cta-box {
+    flex-direction: column; /* পাশাপাশি থেকে নিচে নিচে নামিয়ে দেবে */
+    text-align: center; /* লেখা মাঝখানে */
+    gap: 40px; /* লেখা ও বাটনের মাঝে ফাঁকা জায়গা */
+    padding: 70px 30px; /* মোবাইলে প্যাডিং একটু কমিয়ে দেওয়া */
+  }
+
+  .cta-box h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* ১. ফুটারের মেইন এরিয়া এবং ব্যাকগ্রাউন্ড */
+.footer-area {
+  background-color: #fafafa;
+  background-image: url('./images/bg-pattern-footer-desktop.svg'); /* এক্সটেনশন অ্যাড করা হলো */
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-block: 70px; /* ওপর-নিচে ফাঁকা জায়গা */
+}
+
+/* ২. টপ সেকশন */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+/* সোশ্যাল আইকন হোভার হ্যাক (Filter Magic) */
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a:hover img {
+  /* ইমেজের কালার চেঞ্জ করার প্রো-ট্রিক */
+  filter: brightness(0) saturate(100%) invert(18%) sepia(10%) saturate(2206%)
+    hue-rotate(222deg) brightness(98%) contrast(92%);
+}
+
+/* ৩. ডিভাইডার লাইন */
+.footer-divider {
+  border: none;
+  border-top: 1px solid #dadada;
+  margin-bottom: 50px;
+}
+
+/* ৪. ফুটার লিংকস (Grid Auto-fit ম্যাজিক!) */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* মিডিয়া কোয়েরি ছাড়াই রেসপন্সিভ */
+  gap: 30px;
+}
+
+/* ৫. টাইপোগ্রাফি এবং লিস্ট স্টাইলিং */
+.link-column p {
+  color: #837d87;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px; /* লেখার মাঝে একটু ফাঁকা জায়গা */
+}
+
+.link-column ul {
+  list-style: none; /* বুলেট পয়েন্ট রিমুভ */
+  padding: 0;
+  margin: 0;
+}
+
+.link-column ul li {
+  margin-bottom: 15px; /* Gap এর বদলে মার্জিন-বটম */
+}
+
+.link-column ul li a {
+  text-decoration: none; /* আন্ডারলাইন রিমুভ (a ট্যাগে!) */
+  color: #2d2640;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.link-column ul li a:hover {
+  text-decoration: underline; /* হোভার করলে আন্ডারলাইন আসবে */
+}
+
+/* ৬. মোবাইলের জন্য (Mobile Media Query) */
+@media (max-width: 768px) {
+  .footer-area {
+    background-image: url('./images/bg-pattern-footer-mobile.svg');
+    background-position: center top;
+  }
+
+  .footer-top {
+    flex-direction: column; /* লোগো আর আইকন নিচে নিচে চলে আসবে */
+    gap: 30px;
+  }
+
+  .footer-links {
+    text-align: center; /* মোবাইলে সব লেখা মাঝখানে */
+  }
+}
